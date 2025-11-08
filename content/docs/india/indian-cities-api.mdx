@@ -1,0 +1,67 @@
+---
+title: Indian Cities API
+description: API documentation for fetching city data from Indian states using JSONly API.
+---
+
+# 🇮🇳 Indian Cities API
+
+This documentation explains how to use the **Indian Cities API** to retrieve city information based on a given Indian state.  
+All endpoints return **JSON responses**, making them simple to use with JavaScript, Python, or any HTTP client.
+
+---
+
+## 🔗 Base URL
+
+```bash
+GET https://jsonly.vercel.app/api/india/cities?state="rajasthan"
+```
+
+This is the root endpoint for all city-related API calls.
+
+---
+
+## ⚙️ 1. Fetch All Cities of a State
+
+**Endpoint:**
+
+```bash
+GET https://jsonly.vercel.app/api/india/cities?state=rajasthan
+```
+
+
+
+### 🧠 Description
+Retrieves the **complete list** of all cities belonging to a specific Indian state.
+
+### 📥 Query Parameters
+
+| Parameter | Type | Required | Description |
+|------------|------|-----------|--------------|
+| `state` | `string` | `true` | Name of the state (case-insensitive). Example: `"Rajasthan"`, `"Gujarat"`, `"Maharashtra"` |
+| `limit` | `number` | `false` | Defines how many cities to return in a single API call. Useful for pagination or limiting data. |
+| `offset` | `number` | `false` | Skips the specified number of cities before returning results. Used together with `limit` for paginated requests. |
+
+### 📤 Example Request
+```bash
+GET https://jsonly.vercel.app/api/india/cities?state=himachal%20pradesh
+```
+```json
+{
+  "success": true,
+  "state": "Himachal Pradesh",
+  "total": 7,
+  "limit": 7,
+  "offset": 0,
+  "count": 7,
+  "cities": [
+    "Shimla",
+    "Mandi",
+    "Solan",
+    "Nahan",
+    "Sundarnagar",
+    "Palampur",
+    "Kullu"
+  ],
+  "hasMore": false
+}
+```

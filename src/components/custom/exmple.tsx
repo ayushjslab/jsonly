@@ -6,7 +6,7 @@ const Example = () => {
       {/* Heading */}
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center leading-snug md:leading-tight">
         How Working with API Endpoints <br className="hidden md:block" /> and
-        HTTP Methods in <span className="text-emerald-400">Jsonly</span>?
+        HTTP Methods in <span className="text-emerald-400">JSONly</span>?
       </h1>
 
       {/* Description */}

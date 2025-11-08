@@ -37,7 +37,7 @@ const Header = () => {
       </div>
 
       {menuOpen && (
-        <ul className="flex flex-col gap-4 px-6 pb-4 md:hidden text-white bg-gray-900/90">
+        <ul className="flex flex-col gap-4 px-6 pb-4 md:hidden text-white">
           {navItems.map((item) => (
             <li
               key={item}

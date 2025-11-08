@@ -5,7 +5,7 @@ export default function Hero() {
     <div className="flex flex-col-reverse md:flex-row items-center justify-center px-6 md:px-20 py-12 h-[90vh]">
       <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-6 px-6">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-          Welcome to <br /> <span className="text-emerald-400">Jsonly</span> ❤
+          Welcome to <br /> <span className="text-emerald-400">JSONly</span> ❤
         </h1>
         <div className="">
           <p className="text-lg sm:text-xl md:text-2xl text-gray-300">

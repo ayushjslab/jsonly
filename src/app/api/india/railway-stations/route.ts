@@ -11,11 +11,14 @@ export async function GET(req: NextRequest) {
 
             const paginated = filtered.slice(offset, offset + limit);
 
+            const hasMore = offset + limit < filtered.length;
+
              return NextResponse.json({
                success: true,
                total: filtered.length,
                limit,
                offset,
+               hasMore,
                data: paginated,
              });
 

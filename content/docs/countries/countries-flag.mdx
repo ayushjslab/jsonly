@@ -1,0 +1,226 @@
+---
+title: Country Flags API
+description: Comprehensive API documentation for accessing global country flag data using the JSONly API.
+---
+
+# 🌍 🏳️ Country Flags API
+
+Welcome to the **Country Flags API**, powered by **JSONly**.  
+This API provides detailed information about **country flags**, including each country's **name, ISO code, and flag image URL** — all served in a fast and structured JSON format.
+
+Use this API to easily integrate country flag data into your applications, dashboards, or internationalization tools.
+
+
+## 🔗 Base URL
+
+```bash
+GET https://jsonly.vercel.app/api/countries/flag"
+```
+> **🟦 Note:**  
+> By default, the API returns **10** results per request.  
+> You can modify this using the **`limit`** parameter as needed.  
+>  
+> Country names containing spaces must be URL-encoded using **`%20`**.  
+> Example: `united states → united%20states`  
+
+This is the **root endpoint** for all **country dial code–related API calls**.
+
+
+### 📤 output
+
+```json
+{
+  "success": true,
+  "total": 261,
+  "limit": 10,
+  "offset": 0,
+  "hasMore": true,
+  "data": [
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e6-1f1e8.svg",
+      "country": "Ascension Island",
+      "code": "ac"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e6-1f1e9.svg",
+      "country": "Andorra",
+      "code": "ad"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e6-1f1ea.svg",
+      "country": "United Arab Emirates",
+      "code": "ae"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e6-1f1eb.svg",
+      "country": "Afghanistan",
+      "code": "af"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e6-1f1ec.svg",
+      "country": "Antigua & Barbuda",
+      "code": "ag"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e6-1f1ee.svg",
+      "country": "Anguilla",
+      "code": "ai"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e6-1f1f1.svg",
+      "country": "Albania",
+      "code": "al"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e6-1f1f2.svg",
+      "country": "Armenia",
+      "code": "am"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e6-1f1f4.svg",
+      "country": "Angola",
+      "code": "ad"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e6-1f1f6.svg",
+      "country": "Antarctica",
+      "code": "aq"
+    }
+  ]
+}
+```
+
+---
+
+## 🧩 Query Parameters
+
+| Parameter  | Type     | Required | Description                                                                                         |
+| ----------- | -------- | -------- | --------------------------------------------------------------------------------------------------- |
+| `country`   | `string` | 🟢 Yes    | Name or ISO country code to search for (case-insensitive). Example: `"India"`, `"US"`, `"Japan"`.   |
+| `limit`     | `number` | 🔴 No     | Limits how many country flags are returned per request. Useful for controlling response size.       |
+| `offset`    | `number` | 🔴 No     | Skips a specified number of results before returning data. Typically used with `limit` for pagination. |
+
+---
+
+## ⚙️ 1. Fetch Flags By Name
+
+```bash
+GET https://jsonly.vercel.app/api/countries/flag?country=ind"
+```
+### 📤 output
+
+```json
+{
+  "success": true,
+  "total": 3,
+  "limit": 10,
+  "offset": 0,
+  "hasMore": false,
+  "data": [
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1ee-1f1e9.svg",
+      "country": "Indonesia",
+      "code": "id"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1ee-1f1f3.svg",
+      "country": "India",
+      "code": "in"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1ee-1f1f4.svg",
+      "country": "British Indian Ocean Territory",
+      "code": "io"
+    }
+  ]
+}
+```
+---
+
+## ⚙️ 2. Fetch Limited Flgs
+
+```bash
+GET https://jsonly.vercel.app/api/countries/flag?country=br&limit=5"
+```
+### 📤 output
+
+```json
+{
+  "success": true,
+  "total": 6,
+  "limit": 5,
+  "offset": 0,
+  "hasMore": true,
+  "data": [
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e7-1f1f3.svg",
+      "country": "Brunei",
+      "code": "bn"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e7-1f1f7.svg",
+      "country": "Brazil",
+      "code": "br"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e8-1f1ec.svg",
+      "country": "Congo - Brazzaville",
+      "code": "cd"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1ec-1f1ee.svg",
+      "country": "Gibraltar",
+      "code": "gi"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1ee-1f1f4.svg",
+      "country": "British Indian Ocean Territory",
+      "code": "io"
+    }
+  ]
+}
+```
+---
+## ⚙️ 3. Fetch Flags With Limit and Offset
+
+```bash
+GET https://jsonly.vercel.app/api/countries/flag?country=ch&limit=5&offset=3"
+```
+### 📤 output
+
+```json
+{
+  "success": true,
+  "total": 14,
+  "limit": 5,
+  "offset": 3,
+  "hasMore": true,
+  "data": [
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e8-1f1fd.svg",
+      "country": "Christmas Island",
+      "code": "cx"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1e8-1f1ff.svg",
+      "country": "Czechia",
+      "code": "cz"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1ec-1f1eb.svg",
+      "country": "French Guiana",
+      "code": "gf"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1ec-1f1f8.svg",
+      "country": "South Georgia & South', Sandwich Islands",
+      "code": "gs"
+    },
+    {
+      "flag": "https://twemoji.maxcdn.com/2/svg/1f1ed-1f1f0.svg",
+      "country": "Hong Kong SAR China",
+      "code": "hk"
+    }
+  ]
+}
+```

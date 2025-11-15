@@ -1,12 +1,15 @@
-import React from "react";
+"use client"
+
+import { useRouter } from "next/navigation";
 
 const Example = () => {
+  const router = useRouter();
   return (
     <div className="flex flex-col items-center justify-center px-6 md:px-20 py-16 space-y-8">
       {/* Heading */}
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center leading-snug md:leading-tight">
         How Working with API Endpoints <br className="hidden md:block" /> and
-        HTTP Methods in <span className="text-emerald-400">JSONly</span>?
+        HTTP Methods in <span className="text-emerald-400">JSON</span>ly?
       </h1>
 
       {/* Description */}
@@ -24,10 +27,10 @@ const Example = () => {
 
       {/* Optional CTA Buttons */}
       <div className="flex flex-col sm:flex-row gap-4 mt-4">
-        <button className="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 rounded-lg font-semibold transition-all duration-300">
+        <button onClick={() => router.push(`/docs`)} className="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 rounded-lg font-semibold transition-all duration-300">
           Try APIs
         </button>
-        <button className="px-6 py-3 border border-emerald-500 hover:bg-emerald-500 hover:text-white rounded-lg font-semibold transition-all duration-300">
+        <button onClick={() => router.push(`https://github.com/ayushjslab/jsonly`)} className="px-6 py-3 border border-emerald-500 hover:bg-emerald-500 hover:text-white rounded-lg font-semibold transition-all duration-300">
           Learn More
         </button>
       </div>

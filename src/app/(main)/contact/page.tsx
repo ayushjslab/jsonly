@@ -1,35 +1,29 @@
-"use client";
-
+/* eslint-disable @next/next/no-img-element */
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { SiThreads } from "react-icons/si";
 import { Sparkles } from "lucide-react";
 
-export default function Footer() {
+export default function ContactPage() {
   return (
-    <footer className="w-full mt-20  border-t border-emerald-500/20 py-14 relative overflow-hidden">
-      {/* Glow Background */}
-      <div className="absolute inset-0 bg-emerald-500/10 blur-3xl opacity-30 pointer-events-none" />
+    <main className="min-h-screen w-full flex items-center justify-center py-20 px-6">
+      <div className="max-w-3xl w-full bg-zinc-900 rounded-3xl p-10 border border-emerald-500/20 shadow-xl">
+        <div className="flex flex-col items-center text-center space-y-6">
+          <img
+            src="https://avatars.githubusercontent.com/u/166295238?v=4"
+            alt="Ayush Saini"
+            className="w-32 h-32 rounded-full object-cover border-4 border-emerald-400 shadow-lg"
+          />
 
-      <div className="relative max-w-6xl mx-auto px-6">
-        {/* Top Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-10">
-          {/* Brand */}
-          <div className="text-center md:text-left space-y-2">
-            <div className="flex items-center justify-center md:justify-start gap-2">
-              <Sparkles className="text-emerald-400 w-6 h-6" />
-              <h2 className="text-3xl font-bold text-white tracking-wide">
-                JSONly
-              </h2>
-            </div>
-            <p className="text-zinc-400 text-sm leading-relaxed">
-              Lightweight JSON APIs crafted to simplify your development
-              workflow with speed, precision, and consistency.
-            </p>
+          <h1 className="text-4xl font-bold text-white">Ayush Saini</h1>
+          <p className="text-xl text-emerald-400 font-medium">Full Stack Developer</p>
+
+          <div className="space-y-2 text-zinc-300 text-lg">
+            <p>📞 8824415430</p>
+            <p>📧 ayush.jslab@gmail.com</p>
           </div>
 
-          {/* Social Links */}
-          <div className="flex items-center gap-6 text-white text-2xl">
+          <div className="flex items-center gap-6 text-2xl text-white mt-4">
             <a
               href="https://github.com/ayushjslab"
               target="_blank"
@@ -74,16 +68,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
-
-        {/* Divider */}
-        <div className="w-full border-t border-emerald-500/10 my-10" />
-
-        {/* Bottom Text */}
-        <div className="text-center text-zinc-500 text-sm">
-          © {new Date().getFullYear()} JSONly — Crafted with
-          <span className="text-emerald-400"> ♥</span> for developers.
-        </div>
       </div>
-    </footer>
+    </main>
   );
 }

@@ -1,7 +1,11 @@
 import { INDIAN_CITIES } from "@/json/cities/india";
 import { NextRequest, NextResponse } from "next/server";
+import {CORS} from "@/lib/cors"
 
 type StateName = keyof typeof INDIAN_CITIES;
+export async function OPTIONS() {
+  return CORS(NextResponse.json({}, { status: 200 }));
+}
 
 export async function GET(req: NextRequest) {
   try {
@@ -21,9 +25,8 @@ export async function GET(req: NextRequest) {
     const formattedState = toTitleCase(state) as StateName;
 
     if (!INDIAN_CITIES[formattedState]) {
-      return NextResponse.json(
-        { error: "Invalid state name" },
-        { status: 404 }
+      return CORS(
+        NextResponse.json({ error: "Invalid state name" }, { status: 404 })
       );
     }
 
@@ -40,24 +43,28 @@ export async function GET(req: NextRequest) {
 
     const paginatedCities = cities.slice(start, end);
 
-     return NextResponse.json(
-       {
-         success: true,
-         state: formattedState,
-         total,
-         limit,
-         offset: start,
-         count: paginatedCities.length,
-         cities: paginatedCities,
-         hasMore: end < total,
-       },
-       { status: 200 }
+     return CORS(
+       NextResponse.json(
+         {
+           success: true,
+           state: formattedState,
+           total,
+           limit,
+           offset: start,
+           count: paginatedCities.length,
+           cities: paginatedCities,
+           hasMore: end < total,
+         },
+         { status: 200 }
+       )
      );
   } catch (error) {
     console.log(error);
-    return NextResponse.json(
-      { error: "Internal Server Error", success: false },
-      { status: 500 }
+    return CORS(
+      NextResponse.json(
+        { error: "Internal Server Error", success: false },
+        { status: 500 }
+      )
     );
   }
 }

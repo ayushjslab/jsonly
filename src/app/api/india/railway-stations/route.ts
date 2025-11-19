@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { INDIAN_RAILWAY_STATIONS } from "@/json/india/railway-statons";
+import {CORS} from "@/lib/cors"
+
+export async function OPTIONS() {
+  return CORS(NextResponse.json({}, { status: 200 }));
+}
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -20,19 +26,23 @@ export async function GET(req: NextRequest) {
 
     const hasMore = offset + limit < filtered.length;
 
-    return NextResponse.json({
-      success: true,
-      total: filtered.length,
-      limit,
-      offset,
-      hasMore,
-      data: paginated,
-    });
+    return CORS(
+      NextResponse.json({
+        success: true,
+        total: filtered.length,
+        limit,
+        offset,
+        hasMore,
+        data: paginated,
+      })
+    );
   } catch (error) {
     console.log(error);
-    return NextResponse.json(
-      { success: false, message: "Internal Server Error" },
-      { status: 500 }
+    return CORS(
+      NextResponse.json(
+        { success: false, message: "Internal Server Error" },
+        { status: 500 }
+      )
     );
   }
 }

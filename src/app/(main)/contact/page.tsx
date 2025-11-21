@@ -6,7 +6,7 @@ import { Sparkles } from "lucide-react";
 
 export default function ContactPage() {
   return (
-    <main className="w-full h-full flex items-center justify-center px-6">
+    <div className="w-full flex-1 flex items-center justify-center px-6">
       <div className="max-w-3xl w-full bg-zinc-900 rounded-3xl p-10 border border-emerald-500/20 shadow-xl">
         <div className="flex flex-col items-center text-center space-y-6">
           <img
@@ -69,6 +69,6 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

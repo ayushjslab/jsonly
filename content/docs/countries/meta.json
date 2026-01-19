@@ -1,0 +1,8 @@
+{
+    "title": "Global Data",
+    "icon": "Globe",
+    "pages": [
+        "countries-flag",
+        "contry-dial-code"
+    ]
+}

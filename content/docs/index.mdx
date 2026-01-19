@@ -5,22 +5,70 @@ description: Free, lightweight, and blazing-fast JSON APIs for developers.
 
 # 🚀 Welcome to **JSONly**
 
-JSONly is a free and developer-friendly API platform that provides **ready-to-use JSON data** for learning, testing, and building applications.  
-No authentication keys. No setup. Just clean, structured data — instantly.
+JSONly is a free, developer-friendly API platform designed to provide **ready-to-use JSON data** instantly. Whether you're building a prototype, learning a new framework, or testing an application, we've got the data you need.
 
 ---
 
-## 🌐 Why JSONly?
-
-- ⚡ **Instant Access** — Fetch data directly using simple REST endpoints.  
-- 📚 **Rich Datasets** — Explore cities, states, countries, users, and more.  
-- 🔒 **No API Key Needed** — Public endpoints, fully open for developers.  
-- 🧩 **Perfect for Frontend Projects** — Works seamlessly with Next.js, React, and any HTTP client.  
-- 🧠 **Educational Purpose** — Ideal for students, learners, and hobby developers to practice API integration.
+<Cards>
+  <Card
+    title="No Authentication"
+    description="Skip the API keys. Just fetch and build."
+    icon={<icons.ShieldOff className="text-emerald-400" />}
+  />
+  <Card
+    title="Full CRUD Support"
+    description="Test mutations with in-memory POST, PUT, and DELETE."
+    icon={<icons.Database className="text-blue-400" />}
+  />
+  <Card
+    title="Developer Friendly"
+    description="Clean, structured JSON responses for any client."
+    icon={<icons.Code2 className="text-purple-400" />}
+  />
+</Cards>
 
 ---
 
-## 🔗 Example Request
+## 🏁 Getting Started
+
+<Steps>
+<Step>
+### Choose an Endpoint
+Browse through our [Global Data](/docs/countries) or [Indian Datasets](/docs/india) to find the data you need.
+</Step>
+
+<Step>
+### Refine with Parameters
+Use query parameters like `limit`, `offset`, and `search` to get exactly what you want.
+</Step>
+
+<Step>
+### Start Building
+Integrate the raw JSON directly into your frontend or use it for backend testing.
+</Step>
+</Steps>
+
+---
+
+## 🔗 Quick Example
+
+Fetch all Indian states with a simple GET request:
 
 ```bash
 GET https://jsonly.vercel.app/api/india/states
+```
+
+#### Expected Output
+```json
+{
+  "success": true,
+  "total": 36,
+  "states": ["Andhra Pradesh", "Arunachal Pradesh", "..."]
+}
+```
+
+---
+
+<Callout emoji="💡">
+Want to contribute or suggest a new dataset? Check out our [GitHub Repository](https://github.com/ayushjslab/jsonly).
+</Callout>

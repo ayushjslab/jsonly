@@ -1,223 +1,136 @@
 ---
 title: Indian Railway Stations API
-description: Comprehensive API documentation for accessing Indian railway station data using the JSONly API.
+description: Comprehensive API documentation for fetching and managing Indian railway station data using the JSONly API.
 icon: TrainFront
 ---
 
 # 🇮🇳 🚆 Indian Railway Stations API
 
-Welcome to the **Indian Railway Stations API**, powered by **JSONly**.  
-This API allows you to fetch detailed data about railway stations across India — including **station codes, names, and associated cities** — all in a fast and structured JSON format.
-
-Use this API to integrate Indian railway station data into your applications, dashboards, or travel tools with ease.
-
+Welcome to the **Indian Railway Stations API**. This API allows you to fetch and manage detailed data about railway stations across India — including station codes, names, and associated cities.
 
 ---
 
 ## 🔗 Base URL
 
 ```bash
-GET https://jsonly.vercel.app/api/india/railway-stations
+https://jsonly.vercel.app/api/india/railway-stations
 ```
-> **Note:**  
-> By default, the API returns **10** results per request.  
-> You can adjust this using the `limit` parameter as needed.  
->  
-> Spaces in URLs are encoded as `%20`.  
-> Example: `new delhi → new%20delhi`
 
+---
 
-This is the root endpoint for all railway staion realted API calls.
+## ⚙️ Query Parameters (GET)
 
-### 📤 output
-
-```json
-{
-  "success": true,
-  "total": 10,
-  "limit": 10,
-  "offset": 0,
-  "hasMore": false,
-  "data": [
-    {
-      "stnCode": "AHA",
-      "stnName": "Abhaipur",
-      "stnCity": "Abhaipur"
+<TypeTable
+  type={{
+    station: {
+      description: 'Search by station name, code, or city (fuzzy).',
+      type: 'string',
+      default: 'None'
     },
-    {
-      "stnCode": "AYU",
-      "stnName": "Abhayapuri Asam",
-      "stnCity": "Abhayapuri Asam"
+    limit: {
+      description: 'Limits how many stations are returned.',
+      type: 'number',
+      default: '10'
     },
-    {
-      "stnCode": "ABS",
-      "stnName": "Abohar",
-      "stnCity": "Abohar"
-    },
-    {
-      "stnCode": "ABR",
-      "stnName": "Abu Road",
-      "stnCity": "Abu Road"
-    },
-    {
-      "stnCode": "ULD",
-      "stnName": "Achalda",
-      "stnCity": "Achalda"
-    },
-    {
-      "stnCode": "AH",
-      "stnName": "Achhnera Junction",
-      "stnCity": "Achhnera Junction"
-    },
-    {
-      "stnCode": "ADD",
-      "stnName": "Adas Road",
-      "stnCity": "Adas Road"
-    },
-    {
-      "stnCode": "ADVI",
-      "stnName": "Adavali",
-      "stnCity": "Adavali"
-    },
-    {
-      "stnCode": "AAR",
-      "stnName": "Adesar",
-      "stnCity": "Adesar"
-    },
-    {
-      "stnCode": "ABZ",
-      "stnName": "Adgaon Buzurg",
-      "stnCity": "Adgaon Buzurg"
+    offset: {
+      description: 'Skips the specified number of stations.',
+      type: 'number',
+      default: '0'
     }
-  ]
-}
-```
+  }}
+/>
 
 ---
 
-## 🧩 Query Parameters
-| Parameter | Type     | Required | Description                                                                                           |
-| ---------- | -------- | -------- | ----------------------------------------------------------------------------------------------------- |
-| `station`  | `string` | 🟢 Yes    | Search query for the station name, station code, or city (case-insensitive). Example: `"Delhi"`, `"NDLS"`, `"Mumbai"` |
-| `limit`    | `number` | 🔴 No     | Maximum number of stations to return per request. Useful for pagination or limiting results.          |
-| `offset`   | `number` | 🔴 No     | Number of stations to skip before returning results. Combine with `limit` for pagination.            |
+<Steps>
 
----
+<Step>
+### Search Stations
 
-## ⚙️ 1. Fetch Stations By Name
-
+**Endpoint:**
 ```bash
-GET https://jsonly.vercel.app/api/india/railway-stations?station=awr
+GET /api/india/railway-stations?station=NDLS
 ```
-### 📤 output
 
+#### Output Example
 ```json
 {
   "success": true,
-  "total": 2,
-  "limit": 10,
-  "offset": 0,
-  "hasMore": false,
+  "total": 1,
   "data": [
     {
-      "stnCode": "AWR",
-      "stnName": "Alwar",
-      "stnCity": "Alwar"
-    },
-    {
-      "stnCode": "KAWR",
-      "stnName": "Karwar",
-      "stnCity": "Karwar"
-    }
-  ]
-}
-```
----
-
-## ⚙️ 2. Fetch Limited Stations
-
-```bash
-GET https://jsonly.vercel.app/api/india/railway-stations?station=una&limit=5
-```
-### 📤 output
-
-```json
-{
-  "success": true,
-  "total": 25,
-  "limit": 5,
-  "offset": 0,
-  "hasMore": true,
-  "data": [
-    {
-      "stnCode": "ARCL",
-      "stnName": "Arunachal",
-      "stnCity": "Arunachal"
-    },
-    {
-      "stnCode": "CAR",
-      "stnName": "Chunar",
-      "stnCity": "Chunar"
-    },
-    {
-      "stnCode": "GUNA",
-      "stnName": "Guna",
-      "stnCity": "Guna"
-    },
-    {
-      "stnCode": "GALA",
-      "stnName": "Gunadala",
-      "stnCity": "Gunadala"
-    },
-    {
-      "stnCode": "JUD",
-      "stnName": "Jagadhri",
-      "stnCity": "Yamunanagar"
-    }
-  ]
-}
-```
----
-## ⚙️ 3. Fetch Stations With Limit and Offset
-
-```bash
-GET https://jsonly.vercel.app/api/india/railway-stations?station=dl&limit=5&offset=3
-```
-### 📤 output
-
-```json
-{
-  "success": true,
-  "total": 60,
-  "limit": 5,
-  "offset": 3,
-  "hasMore": true,
-  "data": [
-    {
-      "stnCode": "BUD",
-      "stnName": "Badlapur",
-      "stnCity": "Badlapur"
-    },
-    {
-      "stnCode": "BHD",
-      "stnName": "Badli",
+      "stnCode": "NDLS",
+      "stnName": "New Delhi",
       "stnCity": "New Delhi"
-    },
-    {
-      "stnCode": "BDI",
-      "stnName": "Bhadli",
-      "stnCity": "Bhadli"
-    },
-    {
-      "stnCode": "CKDL",
-      "stnName": "Chakdayala",
-      "stnCity": "Chakdayala"
-    },
-    {
-      "stnCode": "CDLD",
-      "stnName": "Chandlodiya",
-      "stnCity": "Chandlodiya"
     }
   ]
 }
 ```
+</Step>
+
+<Step>
+### Pagination
+
+**Endpoint:**
+```bash
+GET /api/india/railway-stations?limit=5&offset=10
+```
+
+<Callout type="info">
+The default `limit` is 10. You can paginate through thousands of stations using `offset`.
+</Callout>
+</Step>
+
+</Steps>
+
+---
+
+## 🛠️ Mutations (Full CRUD)
+
+<Callout type="warn">
+Mutations are currently **in-memory** and will revert to the original state upon server restart.
+</Callout>
+
+### 1. Add a Station (POST)
+
+Register a new railway station.
+
+```bash
+POST /api/india/railway-stations
+Content-Type: application/json
+
+{
+  "stnCode": "TEST",
+  "stnName": "Test Station",
+  "stnCity": "Test City"
+}
+```
+
+### 2. Update a Station (PUT/PATCH)
+
+Update station details by its code.
+
+```bash
+PATCH /api/india/railway-stations
+Content-Type: application/json
+
+{
+  "stnCode": "TEST",
+  "stnName": "Updated Test Station",
+  "stnCity": "Updated Test City"
+}
+```
+
+### 3. Delete a Station (DELETE)
+
+Remove a station from the database.
+
+```bash
+DELETE /api/india/railway-stations?stnCode=TEST
+```
+
+---
+
+<Callout emoji="🎫">
+Building a travel app? Combine this with our [India Cities API](/docs/india/indian-cities-api) for a complete experience.
+</Callout>

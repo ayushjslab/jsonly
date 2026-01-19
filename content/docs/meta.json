@@ -1,19 +1,11 @@
 {
-  "title": "API's",
-  "description": "Useful Data API's",
-  "icon": "Dna",
+  "title": "Documentation",
+  "description": "JSONly API Documentation",
+  "icon": "BookOpen",
   "root": true,
-  "page": [
-    { "label": "Get Started" },
+  "pages": [
     "index",
-
-    { "label": "Countries" },
-    "countries/countries-flag",
-    "countries/country-dial-code",
-
-    { "label": "India" },
-    "india/indian-cities-api",
-    "india/indian-railway-station",
-    "india/indan-states-api"
+    "countries",
+    "india"
   ]
 }

@@ -1,12 +1,12 @@
 ---
 title: Indian Cities API
-description: API documentation for fetching city data from Indian states using JSONly API.
+description: API documentation for fetching and managing city data from Indian states using JSONly API.
 icon : Building2
 ---
 
 # 🇮🇳 Indian Cities API
 
-This documentation explains how to use the **Indian Cities API** to retrieve city information based on a given Indian state.  
+This documentation explains how to use the **Indian Cities API** to retrieve and manage city information.  
 All endpoints return **JSON responses**, making them simple to use with JavaScript, Python, or any HTTP client.
 
 ---
@@ -14,108 +14,132 @@ All endpoints return **JSON responses**, making them simple to use with JavaScri
 ## 🔗 Base URL
 
 ```bash
-GET https://jsonly.vercel.app/api/india/cities?state=rajasthan
+https://jsonly.vercel.app/api/india/cities
 ```
-
-This is the root endpoint for all city-related API calls.
 
 ---
 
-| Parameter | Type     | Required | Description                                                                                               |
-| --------- | -------- | -------- | --------------------------------------------------------------------------------------------------------- |
-| `state`   | `string` | 🟢 Yes    | Name of the state (case-insensitive). Example: `"Rajasthan"`, `"Gujarat"`, `"Maharashtra"`, etc.          |
-| `limit`   | `number` | 🔴 No     | Limits how many cities are returned in one API call. Useful for pagination or restricting data.           |
-| `offset`  | `number` | 🔴 No     | Skips the specified number of cities before returning results. Used together with `limit` for pagination. |
+## ⚙️ Query Parameters (GET)
 
+<TypeTable
+  type={{
+    state: {
+      description: 'Name of the state (case-insensitive).',
+      type: 'string',
+      default: 'Required'
+    },
+    limit: {
+      description: 'Limits how many cities are returned.',
+      type: 'number',
+      default: 'None'
+    },
+    offset: {
+      description: 'Skips the specified number of cities.',
+      type: 'number',
+      default: '0'
+    }
+  }}
+/>
 
+---
 
-## ⚙️ 1. Fetch All Cities of a State
+<Steps>
+
+<Step>
+### Fetch All Cities of a State
 
 **Endpoint:**
-
 ```bash
-GET https://jsonly.vercel.app/api/india/cities?state=himachal%20pradesh
+GET /api/india/cities?state=rajasthan
 ```
 
-<div className="border-l-4 border-blue-500 px-3 py-2 bg-blue-800/10 rounded-md text-sm leading-relaxed"> <strong className="italic text-blue-600">Note:</strong> In URLs, spaces are encoded as <code>%20</code>. Example: <code>himachal pradesh → himachal%20pradesh</code> </div>
+<Callout type="info">
+In URLs, spaces are encoded as `%20`. Example: `himachal pradesh` → `himachal%20pradesh`.
+</Callout>
 
-### 📤 output
-
+#### Output Example
 ```json
 {
   "success": true,
-  "state": "Himachal Pradesh",
-  "total": 7,
-  "limit": 7,
-  "offset": 0,
-  "count": 7,
-  "cities": [
-    "Shimla",
-    "Mandi",
-    "Solan",
-    "Nahan",
-    "Sundarnagar",
-    "Palampur",
-    "Kullu"
-  ],
-  "hasMore": false
+  "state": "Rajasthan",
+  "total": 5,
+  "cities": ["Jaipur", "Jodhpur", "Udaipur", "Bikaner", "Ajmer"]
 }
 ```
+</Step>
 
-## ⚙️ 2. Fetch limited Cities of a State
-
+<Step>
+### Pagination (Limit & Offset)
 
 **Endpoint:**
-
 ```bash
-GET https://jsonly.vercel.app/api/india/cities?state=himachal%20pradesh&limit=4
+GET /api/india/cities?state=haryana&limit=2&offset=1
 ```
 
-### 📤 output
-
+#### Output Example
 ```json
 {
   "success": true,
-  "state": "Himachal Pradesh",
-  "total": 7,
-  "limit": 4,
-  "offset": 0,
-  "count": 4,
-  "cities": [
-    "Shimla",
-    "Mandi",
-    "Solan",
-    "Nahan"
-  ],
+  "state": "Haryana",
+  "total": 10,
+  "limit": 2,
+  "offset": 1,
+  "count": 2,
+  "cities": ["Gurgaon", "Rohtak"],
   "hasMore": true
 }
 ```
+</Step>
 
-## ⚙️ 3. Fetch limited cities of a state with limit and offset.
+</Steps>
 
+---
 
-**Endpoint:**
+## 🛠️ Mutations (Full CRUD)
+
+<Callout type="warn">
+Mutations are currently **in-memory** and will revert to the original state upon server restart.
+</Callout>
+
+### 1. Add a City (POST)
+
+Adds a new city to an existing state.
 
 ```bash
-GET https://jsonly.vercel.app/api/india/cities?state=himachal%20pradesh&limit=4&offset=2
-```
+POST /api/india/cities
+Content-Type: application/json
 
-### 📤 output
-
-```json
 {
-  "success": true,
-  "state": "Himachal Pradesh",
-  "total": 7,
-  "limit": 4,
-  "offset": 2,
-  "count": 4,
-  "cities": [
-    "Solan",
-    "Nahan",
-    "Sundarnagar",
-    "Palampur"
-  ],
-  "hasMore": true
+  "state": "Haryana",
+  "city": "New Cyber City"
 }
 ```
+
+### 2. Update a City (PUT/PATCH)
+
+Rename a city within a state.
+
+```bash
+PATCH /api/india/cities
+Content-Type: application/json
+
+{
+  "state": "Haryana",
+  "oldCity": "New Cyber City",
+  "newCity": "Modern Cyber City"
+}
+```
+
+### 3. Delete a City (DELETE)
+
+Remove a city from a state.
+
+```bash
+DELETE /api/india/cities?state=Haryana&city=Modern Cyber City
+```
+
+---
+
+<Callout emoji="💡">
+Looking for state names? Use the [Indian States API](/docs/india/indian-states-api).
+</Callout>

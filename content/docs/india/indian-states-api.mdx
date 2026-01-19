@@ -1,164 +1,134 @@
 ---
 title: Indian States API
-description: API documentation for fetching Indian states using JSONly API.
-icon: MapPinHouse
+description: API documentation for fetching and managing list of Indian states and union territories using JSONly API.
+icon : Map
 ---
 
 # 🇮🇳 Indian States API
 
-This documentation explains how to use the **Indian States API** to retrieve a list of all Indian states available in the JSONly database.  
-All endpoints return **JSON responses**, suitable for integration with JavaScript, Python, or any HTTP client.
+This documentation explains how to use the **Indian States API** to retrieve and manage the list of states and union territories in India.
 
 ---
 
 ## 🔗 Base URL
 
 ```bash
-GET https://jsonly.vercel.app/api/india/states
+https://jsonly.vercel.app/api/india/states
 ```
 
-### 🧩 Query Parameters
+---
 
-| Parameter | Type | Required | Description |
-|------------|------|-----------|--------------|
-| `limit` | `number` | `🔴 No` | Defines how many states to return in a single API call. Useful for pagination or limiting data. |
-| `offset` | `number` | `🔴 No` | Skips the specified number of states before returning results. Used together with `limit` for paginated requests. |
+## ⚙️ Query Parameters (GET)
 
-## ⚙️ 1. Fetch all states
+<TypeTable
+  type={{
+    search: {
+      description: 'Filter states by name (fuzzy search).',
+      type: 'string',
+      default: 'None'
+    },
+    limit: {
+      description: 'Limits how many states are returned.',
+      type: 'number',
+      default: 'None'
+    },
+    offset: {
+      description: 'Skips the specified number of states.',
+      type: 'number',
+      default: '0'
+    }
+  }}
+/>
+
+---
+
+<Steps>
+
+<Step>
+### List All States
 
 **Endpoint:**
-
 ```bash
-GET https://jsonly.vercel.app/api/india/states
+GET /api/india/states
 ```
-### 📤 output
 
+#### Output Example
 ```json
 {
   "success": true,
-  "query": "",
-  "total": 34,
-  "limit": 34,
-  "offset": 0,
-  "count": 34,
-  "hasMore": false,
-  "states": [
-    "Andaman and Nicobar Islands",
-    "Haryana",
-    "Tamil Nadu",
-    "Madhya Pradesh",
-    "Jharkhand",
-    "Mizoram",
-    "Nagaland",
-    "Himachal Pradesh",
-    "Tripura",
-    "Andhra Pradesh",
-    "Punjab",
-    "Chandigarh",
-    "Rajasthan",
-    "Assam",
-    "Odisha",
-    "Chhattisgarh",
-    "Jammu and Kashmir",
-    "Karnataka",
-    "Manipur",
-    "Kerala",
-    "Delhi",
-    "Dadra and Nagar Haveli",
-    "Puducherry",
-    "Uttarakhand",
-    "Uttar Pradesh",
-    "Bihar",
-    "Gujarat",
-    "Telangana",
-    "Meghalaya",
-    "Himachal Praddesh",
-    "Arunachal Pradesh",
-    "Maharashtra",
-    "Goa",
-    "West Bengal"
-  ]
+  "total": 36,
+  "count": 36,
+  "states": ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "..."]
 }
 ```
+</Step>
 
-## ⚙️ 2. Fetch states by similar name
+<Step>
+### Search States
 
 **Endpoint:**
-
 ```bash
-GET https://jsonly.vercel.app/api/india/states?state=pradesh
+GET /api/india/states?state=punjab
 ```
 
-### 📤 output
-
+#### Output Example
 ```json
 {
   "success": true,
-  "query": "pradesh",
-  "total": 5,
-  "limit": 34,
-  "offset": 0,
-  "count": 5,
-  "hasMore": false,
-  "states": [
-    "Madhya Pradesh",
-    "Himachal Pradesh",
-    "Andhra Pradesh",
-    "Uttar Pradesh",
-    "Arunachal Pradesh"
-  ]
+  "total": 1,
+  "states": ["Punjab"]
 }
 ```
+</Step>
 
-## ⚙️ 3. Fetch limited states
+</Steps>
 
-**Endpoint:**
+---
+
+## 🛠️ Mutations (Full CRUD)
+
+<Callout type="warn">
+Mutations are currently **in-memory** and will revert to the original state upon server restart. Note that modifying a state name here will also affect the [Cities API](/docs/india/indian-cities-api).
+</Callout>
+
+### 1. Register a New State (POST)
+
+Add a new state with an initial set of cities.
 
 ```bash
-GET https://jsonly.vercel.app/api/india/states?limit=6
-```
-### 📤 output
+POST /api/india/states
+Content-Type: application/json
 
-```json
 {
-  "success": true,
-  "query": "",
-  "total": 34,
-  "limit": 6,
-  "offset": 0,
-  "count": 6,
-  "hasMore": true,
-  "states": [
-    "Andaman and Nicobar Islands",
-    "Haryana",
-    "Tamil Nadu",
-    "Madhya Pradesh",
-    "Jharkhand",
-    "Mizoram"
-  ]
+  "state": "New Territory",
+  "cities": ["City A", "City B"]
 }
 ```
-## ⚙️ 4. Fetch limited states with limit and offset.
 
-**Endpoint:**
+### 2. Rename a State (PATCH)
 
-### 📤 output
+Rename an existing state.
 
 ```bash
-GET https://jsonly.vercel.app/api/india/states?state=pradesh&limit=2&offset=2
-```
-```json
+PATCH /api/india/states
+Content-Type: application/json
+
 {
-  "success": true,
-  "query": "pradesh",
-  "total": 5,
-  "limit": 2,
-  "offset": 2,
-  "count": 2,
-  "hasMore": true,
-  "states": [
-    "Andhra Pradesh",
-    "Uttar Pradesh"
-  ]
+  "oldState": "New Territory",
+  "newState": "Updated Territory"
 }
 ```
+
+### 3. Delete a State (DELETE)
+
+Remove a state and all its associated cities.
+
+```bash
+DELETE /api/india/states?state=Updated Territory
+```
+
+---
+
+<Callout emoji="📍">
+Need cities for a specific state? Use the [Indian Cities API](/docs/india/indian-cities-api).
+</Callout>

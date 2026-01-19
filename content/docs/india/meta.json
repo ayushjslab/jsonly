@@ -1,0 +1,9 @@
+{
+    "title": "Indian Datasets",
+    "icon": "Map",
+    "pages": [
+        "indian-cities-api",
+        "indian-states-api",
+        "indian-railway-station"
+    ]
+}

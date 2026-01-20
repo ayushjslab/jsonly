@@ -13,6 +13,7 @@ export default function Home() {
         strategy="afterInteractive"
       />
       <div className="relative">
+        
         <Hero />
         <LiveTester />
         <ShowCase />
